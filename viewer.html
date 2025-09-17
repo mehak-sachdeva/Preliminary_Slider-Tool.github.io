@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparison Viewer</title>
+    <style>
+        /* Basic styles for the page layout */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden; /* Prevents scrollbars on the main page */
+        }
+        .page-container {
+            display: flex;
+            height: 100%;
+        }
+        /* The main content frame */
+        #contentFrame {
+            flex-grow: 1; /* Allows the frame to take up all available space */
+            border: none;
+            height: 100%;
+        }
+        /* The sidebar for controls */
+        .sidebar {
+            width: 300px;
+            flex-shrink: 0; /* Prevents the sidebar from shrinking */
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 1px solid #dee2e6;
+            box-shadow: -3px 0 10px rgba(0,0,0,0.05);
+            overflow-y: auto;
+        }
+        .sidebar h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #343a40;
+        }
+        #htmlSelector {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            cursor: pointer;
+        }
+        #htmlSelector:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        
+        <iframe id="contentFrame" src="" title="Content Display Area">
+            <p>Your browser does not support iframes.</p>
+        </iframe>
+
+        <div class="sidebar">
+            <h2>Select Comparison</h2>
+            <select id="htmlSelector" onchange="loadPage()">
+                <option value="html_sliders/trial_slider_intercept.html">Intercept</option>
+                <option value="html_sliders/comparison_sex_ratio.html">Sex Ratio</option>
+                <option value="html_sliders/comparison_pct_fb.html">% Foreign Born</option>
+                <option value="html_sliders/comparison_pct1829.html">% Age 18-29</option>
+                <option value="html_sliders/comparison_pct6585.html">% Age 65-85</option>
+                <option value="html_sliders/comparison_pctblack.html">% Black</option>
+                <option value="html_sliders/comparison_pcthisp.html">% Hispanic</option>
+                <option value="html_sliders/comparison_pctbach.html">% Bachelors</option>
+                <option value="html_sliders/comparison_medinc.html">Median Income</option>
+                <option value="html_sliders/comparison_pctmanu.html">% Manufacturing</option>
+                <option value="html_sliders/comparison_popden.html">Population Density</option>
+                <option value="html_sliders/comparison_3rdparty.html">3rd Party Vote</option>
+                <option value="html_sliders/comparison_voterturnout.html">Voter Turnout</option>
+                <option value="html_sliders/comparison_gini.html">Gini Coefficient</option>
+                </select>
+        </div>
+
+    </div>
+
+    <script>
+        const selector = document.getElementById('htmlSelector');
+        const frame = document.getElementById('contentFrame');
+
+        // Function to load the selected page into the iframe
+        function loadPage() {
+            const selectedFile = selector.value;
+            if (selectedFile) {
+                frame.src = selectedFile;
+            }
+        }
+
+        // Automatically load the first page from the dropdown when the viewer opens
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPage();
+        });
+    </script>
+
+</body>
+</html>
